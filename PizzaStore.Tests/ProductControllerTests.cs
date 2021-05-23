@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PizzaStore.Controllers;
 using PizzaStore.Models;
 using PizzaStore.Models.ViewModels;
+using System;
+using System.Linq;
 using Xunit;
 
 namespace PizzaStore.Tests
@@ -60,7 +59,7 @@ namespace PizzaStore.Tests
 
 			//Действие
 			ProductsListViewModel page1Result = controller.List(null, 1).ViewData.Model as ProductsListViewModel;
-			ProductsListViewModel page2Result = controller.List(null ,2).ViewData.Model as ProductsListViewModel;
+			ProductsListViewModel page2Result = controller.List(null, 2).ViewData.Model as ProductsListViewModel;
 
 			//Утверждение
 			PagingInfo page1Info = page1Result.PagingInfo;
@@ -90,7 +89,7 @@ namespace PizzaStore.Tests
 				new Product {ProductID = 5, Name = "P5", Category = "Cat3"}
 			}).AsQueryable<Product>());
 			ProductController controller = new ProductController(mock.Object) { pageSize = 3 };
-			
+
 			Func<ViewResult, ProductsListViewModel> getModel = result => result?.ViewData?.Model as ProductsListViewModel;
 
 			//Действие

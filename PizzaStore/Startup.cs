@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PizzaStore.Models;
 
 namespace PizzaStore
@@ -35,12 +35,12 @@ namespace PizzaStore
 				route.MapRoute(
 					name: null,
 					template: "{category}/Page{productPage:int}",
-					defaults: new {Controller = "Product", action = "List"}
+					defaults: new { Controller = "Product", action = "List" }
 				);
 				route.MapRoute(
 					name: null,
 					template: "Page{productPage:int}",
-					defaults: new { Controller = "Product", action = "List" , productPage = 1}
+					defaults: new { Controller = "Product", action = "List", productPage = 1 }
 				);
 				route.MapRoute(
 					name: null,

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PizzaStore.Models;
 using PizzaStore.Models.ViewModels;
+using System.Linq;
 
 namespace PizzaStore.Controllers
 {
@@ -19,20 +15,20 @@ namespace PizzaStore.Controllers
 			repository = repo;
 		}
 
-		public ViewResult List(string category,int productPage = 1)
+		public ViewResult List(string category, int productPage = 1)
 		{
 			return View(new ProductsListViewModel
 			{
 				Products = repository.Products
 					.Where(p => category == null || p.Category == category)
-					.OrderBy(p =>p.ProductID)
+					.OrderBy(p => p.ProductID)
 					.Skip((productPage - 1) * pageSize)
 					.Take(pageSize),
 				PagingInfo = new PagingInfo
 				{
 					CurrentPage = productPage,
 					ItemsPerPages = pageSize,
-					TotalItems = category == null ? 
+					TotalItems = category == null ?
 						repository.Products.Count() :
 						repository.Products.Where(p => p.Category == category).Count()
 				},
