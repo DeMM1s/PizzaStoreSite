@@ -1,29 +1,26 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PizzaStore.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using PizzaStore.Models;
 
 namespace PizzaStore.Components
 {
-    public class NavigationMenuViewComponent :ViewComponent
-    {
-	    private IProductRepository repository;
+	public class NavigationMenuViewComponent : ViewComponent
+	{
+		private IProductRepository repository;
 
-	    public NavigationMenuViewComponent(IProductRepository repo)
-	    {
-		    repository = repo;
-	    }
+		public NavigationMenuViewComponent(IProductRepository repo)
+		{
+			repository = repo;
+		}
 
-	    public IViewComponentResult Invoke()
-	    {
-		    ViewBag.SelectedCategory = RouteData?.Values["category"];
-		    return View(repository.Products
-			    .Select(x => x.Category)
-			    .Distinct()
-			    .OrderBy(x => x));
-	    }
-    }
+		public IViewComponentResult Invoke()
+		{
+			ViewBag.SelectedCategory = RouteData?.Values["category"];
+			return View(repository.Products
+				.Select(x => x.Category)
+				.Distinct()
+				.OrderBy(x => x));
+		}
+	}
 }

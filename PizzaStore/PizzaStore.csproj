@@ -13,6 +13,7 @@
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\tether\" />
+    <Folder Include="wwwroot\lib\fontawesome\" />
   </ItemGroup>
 
 </Project>

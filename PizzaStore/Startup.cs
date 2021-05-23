@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PizzaStore.Models;
 
 namespace PizzaStore
@@ -21,8 +22,11 @@ namespace PizzaStore
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(Configuration["Data:PizzaStoreProducts:ConnectionString"]));
 			services.AddTransient<IProductRepository, EFProductRepository>();
+			services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddMemoryCache();
+			services.AddSession();
 			services.AddMvc();
-
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,17 +34,18 @@ namespace PizzaStore
 			app.UseDeveloperExceptionPage();
 			app.UseStatusCodePages();
 			app.UseStaticFiles();
+			app.UseSession();
 			app.UseMvc(route =>
 			{
 				route.MapRoute(
 					name: null,
 					template: "{category}/Page{productPage:int}",
-					defaults: new {Controller = "Product", action = "List"}
+					defaults: new { Controller = "Product", action = "List" }
 				);
 				route.MapRoute(
 					name: null,
 					template: "Page{productPage:int}",
-					defaults: new { Controller = "Product", action = "List" , productPage = 1}
+					defaults: new { Controller = "Product", action = "List", productPage = 1 }
 				);
 				route.MapRoute(
 					name: null,

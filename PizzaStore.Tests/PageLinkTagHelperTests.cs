@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Moq;
 using PizzaStore.Infrastructure;
 using PizzaStore.Models.ViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PizzaStore.Tests
@@ -29,7 +27,8 @@ namespace PizzaStore.Tests
 
 			PageLinkTagHelper helper = new PageLinkTagHelper(urlHelperFactory.Object)
 			{
-				PageModel = new PagingInfo {
+				PageModel = new PagingInfo
+				{
 					CurrentPage = 2,
 					TotalItems = 28,
 					ItemsPerPages = 10
@@ -39,13 +38,13 @@ namespace PizzaStore.Tests
 
 			TagHelperContext context =
 				new TagHelperContext(
-					new TagHelperAttributeList(), 
+					new TagHelperAttributeList(),
 					new Dictionary<object, object>(), "");
 
 			var content = new Mock<TagHelperContent>();
 
 			TagHelperOutput output = new TagHelperOutput(
-				"div", 
+				"div",
 				new TagHelperAttributeList(),
 				(cache, encoder) => Task.FromResult(content.Object));
 

@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using PizzaStore.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace PizzaStore.Infrastructure
 {
-    [HtmlTargetElement("div", Attributes = "page-model")]
-    public class PageLinkTagHelper : TagHelper
-    {
-	    private IUrlHelperFactory urlHelperFactory;
+	[HtmlTargetElement("div", Attributes = "page-model")]
+	public class PageLinkTagHelper : TagHelper
+	{
+		private IUrlHelperFactory urlHelperFactory;
 
-	    public PageLinkTagHelper(IUrlHelperFactory helperFactory)
-	    {
-		    urlHelperFactory = helperFactory;
-	    }
+		public PageLinkTagHelper(IUrlHelperFactory helperFactory)
+		{
+			urlHelperFactory = helperFactory;
+		}
 
 		[ViewContext]
 		[HtmlAttributeNotBound]
