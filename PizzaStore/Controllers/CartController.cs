@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PizzaStore.Infrastructure;
+﻿using Microsoft.AspNetCore.Mvc;
+using PizzaStore.Database;
 using PizzaStore.Models;
 using PizzaStore.Models.ViewModels;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace PizzaStore.Controllers
 		{
 			return View(new CartIndexViewModel
 			{
-				Cart =cart,
+				Cart = cart,
 				ReturnUrl = returnUrl
 			});
 		}

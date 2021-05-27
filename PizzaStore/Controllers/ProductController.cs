@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaStore.Models;
+using PizzaStore.Database;
 using PizzaStore.Models.ViewModels;
 using System.Linq;
 

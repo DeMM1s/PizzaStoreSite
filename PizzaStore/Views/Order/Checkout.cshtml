@@ -1,0 +1,35 @@
+﻿@model Order
+
+@{
+	Layout = "LayoutOrder";
+}
+
+<h2>Оформление заказа</h2>
+<p>Введите ваши контактные данные для доставки</p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Checkout" method="post">
+	<h3>Ваше имя</h3>
+	<div class="form-group">
+		<label>Имя:</label><input asp-for="Name" class="form-control" />
+	</div>
+	<h3>Адрес</h3>
+	<div class="form-group">
+		<label>Город:</label><input asp-for="Sity" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label>Улица:</label><input asp-for="Street" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label>Дом:</label><input asp-for="House" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label>Квартира:</label><input asp-for="Flat" class="form-control" />
+	</div>
+	<h3>Дополнительно</h3>
+	<div class="custom-checkbox">
+		<label><input asp-for="Callback" class="form-control" />Вам перезвонить?</label>
+	</div>
+	<div class="text-center">
+		<input class="btn btn-primary" type="submit" value="Оформить заказ" />
+	</div>
+</form>

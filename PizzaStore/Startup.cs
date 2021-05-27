@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PizzaStore.Database;
 using PizzaStore.Models;
 
 namespace PizzaStore
@@ -22,6 +23,7 @@ namespace PizzaStore
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(Configuration["Data:PizzaStoreProducts:ConnectionString"]));
 			services.AddTransient<IProductRepository, EFProductRepository>();
+			services.AddTransient<IOrderRepository, EFOrderRepository>();
 			services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddMemoryCache();

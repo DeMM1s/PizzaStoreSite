@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PizzaStore.Models;
 using System.Linq;
 
-namespace PizzaStore.Models
+namespace PizzaStore.Database
 {
 	public static class SeedData
 	{

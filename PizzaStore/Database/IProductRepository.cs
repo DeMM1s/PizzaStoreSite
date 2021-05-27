@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using PizzaStore.Models;
+using System.Linq;
 
-namespace PizzaStore.Models
+namespace PizzaStore.Database
 {
 	public interface IProductRepository
 	{

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzaStore.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PizzaStore.Components
 {
