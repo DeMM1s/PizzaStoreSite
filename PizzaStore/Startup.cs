@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,11 @@ namespace PizzaStore
 		{
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(Configuration["Data:PizzaStoreProducts:ConnectionString"]));
+			services.AddDbContext<AppIdentityDbContext>(options =>
+				options.UseSqlServer(Configuration["Data:PizzaStoreIdentity:ConnectionString"]));
+			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddEntityFrameworkStores<AppIdentityDbContext>()
+				.AddDefaultTokenProviders();
 			services.AddTransient<IProductRepository, EFProductRepository>();
 			services.AddTransient<IOrderRepository, EFOrderRepository>();
 			services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -37,6 +43,7 @@ namespace PizzaStore
 			app.UseStatusCodePages();
 			app.UseStaticFiles();
 			app.UseSession();
+			app.UseAuthentication();
 			app.UseMvc(route =>
 			{
 				route.MapRoute(
@@ -64,6 +71,7 @@ namespace PizzaStore
 					template: "{controller=Product}/{action=List}/{id?}");
 			});
 			SeedData.EnsurePopulated(app);
+			IdentitySeedData.EnsurePopulated(app);
 		}
 	}
 }

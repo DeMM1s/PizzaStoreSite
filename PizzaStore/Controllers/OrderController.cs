@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PizzaStore.Database;
 using PizzaStore.Models;
+using System.Linq;
 
 namespace PizzaStore.Controllers
 {
@@ -16,12 +17,14 @@ namespace PizzaStore.Controllers
 			cart = cartService;
 		}
 
+		[Authorize]
 		public ViewResult List()
 		{
 			return View(repository.Orders.Where(o => !o.Delivered));
 		}
 
 		[HttpPost]
+		[Authorize]
 		public IActionResult MarkDelivered(int orderID)
 		{
 			Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
@@ -45,7 +48,7 @@ namespace PizzaStore.Controllers
 			if (cart.Lines.Count() == 0)
 			{
 				{
-					ModelState.AddModelError("","Корзина пуста!");
+					ModelState.AddModelError("", "Корзина пуста!");
 				}
 			}
 			if (ModelState.IsValid)
