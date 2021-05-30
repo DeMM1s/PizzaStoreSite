@@ -48,6 +48,8 @@ namespace PizzaStore.Migrations
 
                     b.Property<bool>("Callback");
 
+                    b.Property<bool>("Delivered");
+
                     b.Property<string>("Flat")
                         .IsRequired();
 
@@ -74,11 +76,14 @@ namespace PizzaStore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category");
+                    b.Property<string>("Category")
+                        .IsRequired();
 
-                    b.Property<string>("Image");
+                    b.Property<string>("Image")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -95,7 +100,8 @@ namespace PizzaStore.Migrations
 
                     b.HasOne("PizzaStore.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -3,11 +3,28 @@
 <div class="">
 	@if (Model.Lines.Count() > 0)
 	{
-		<small class="navbar-text">
-			<b>Корзина</b>
-			@Model.Lines.Sum(x => x.Quantity) items
-			@Model.ComputeTotalValue().ToString("c")
-		</small>
+	<small class="navbar-text">
+		<b>Корзина</b>
+		@Model.Lines.Sum(x => x.Quantity)
+		@switch ((int)Model.Lines.Sum(x => x.Quantity))
+		{
+			case 1:
+				@:единица товара
+				break;
+			case 2:
+			case 3:
+			case 4:
+				@:единицы товара
+				break;
+			default:
+				@:единиц товара
+				break;
+		}
+
+		
+
+		@Model.ComputeTotalValue().ToString("c")
+	</small>
 	}
 	<a class="btn btn-sm btn-secondary"
 	   asp-controller="Cart" asp-action="Index"

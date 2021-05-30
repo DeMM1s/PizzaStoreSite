@@ -16,6 +16,24 @@ namespace PizzaStore.Controllers
 			cart = cartService;
 		}
 
+		public ViewResult List()
+		{
+			return View(repository.Orders.Where(o => !o.Delivered));
+		}
+
+		[HttpPost]
+		public IActionResult MarkDelivered(int orderID)
+		{
+			Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
+			if (order != null)
+			{
+				order.Delivered = true;
+				repository.SaveOrder(order);
+			}
+
+			return View("List", repository.Orders);
+		}
+
 		public ViewResult Checkout()
 		{
 			return View(new Order());
